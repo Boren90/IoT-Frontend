@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import './App.css'
+import MeasurementChart from './components/MeasurementChart'
 
 interface Measurement {
   id: string
@@ -48,6 +49,7 @@ function App() {
       <h1>Mätning</h1>
 
       {latestMeasurement ? (
+        <div>
         <section>
           <div>
             <h2>Temperatur</h2>
@@ -71,9 +73,13 @@ function App() {
             <p>{measurements.length}</p>
           </div>
         </section>
+
+        <MeasurementChart measurements={measurements} />
+        </div>
       ) : (
         <p>Det finns inga mätningar ännu.</p>
       )}
+
     </main>
   )
 }

@@ -2,13 +2,8 @@ import { useEffect, useState } from 'react'
 import './App.css'
 import MeasurementChart from './components/MeasurementChart'
 import type { MeasurementStatistics } from './types/MeasurementStatistics'
+import type { Measurement } from './types/Measurement'
 
-interface Measurement {
-  id: string
-  humidity: number
-  temperature: number
-  timestamp: string
-}
 
 function App() {
   const [measurements, setMeasurements] = useState<Measurement[]>([])

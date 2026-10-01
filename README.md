@@ -1,75 +1,63 @@
-# React + TypeScript + Vite
+# IoT Sensor-projekt - Frontend
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Detta är frontend-delen av IoT Sensor-projektet.
 
-Currently, two official plugins are available:
+Frontend är byggd med React och TypeScript och ansvarar för att hämta mätdata och statistik från backend samt presentera informationen för användaren.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## Exempel på användning av applikationen
 
-## React Compiler
+**Problem:** En husägare har ett garage eller förråd där temperatur och luftfuktighet kan variera mycket. Det kan vara svårt att veta hur klimatet faktiskt har sett ut över tid.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+**Lösning:** Frontend ger användaren möjlighet att se aktuella mätningar, diagram och statistik för en vald dag.
 
-## Expanding the ESLint configuration
+## Teknik
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+- React
+- TypeScript
+- Vite
+- Chart.js
+- CSS
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+## Funktioner
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+Frontend kan:
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+- Visa temperatur och luftfuktighet.
+- Visa den senaste mätningen.
+- Visa antal registrerade mätningar.
+- Visa temperatur och luftfuktighet i ett diagram.
+- Låta användaren välja ett specifikt datum.
+- Visa statistik för den valda dagen.
 
-```
+Statistiken innehåller:
 
-You can also install [eslint-plugin-react-x](https://npmx.dev/package/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://npmx.dev/package/eslint-plugin-react-dom) for React-specific lint rules:
+- Medeltemperatur
+- Minimumtemperatur
+- Maximumtemperatur
+- Medelvärde för luftfuktighet
+- Minimumvärde för luftfuktighet
+- Maximumvärde för luftfuktighet
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+## Dataflöde:
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+### Arduino
 
-```
+Arduino läser av:
+
+- Temperatur i °C
+- Luftfuktighet i %
+
+### WiFi
+
+- Mätdata skickas som JSON via REST API till backend.
+
+### Spring Boot Backend
+
+- Tar emot och hanterar data.
+- Lagrar mätningarna i en lokal MongoDB-databas.
+
+### Frontend
+
+- Hämtar data från backend via REST API.
+- Visar mätningarna för användaren.
+- Visar statistik och diagram för valda dagar.
